@@ -6,6 +6,9 @@ import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.widget.ListView;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class Activity2try extends Activity {
@@ -22,8 +25,10 @@ public class Activity2try extends Activity {
         List<ApplicationInfo> packages = packageManager.
                 getInstalledApplications(PackageManager.GET_META_DATA);
 
+        List<ApplicationInfo> userPackages = filterUserPackages(packages);
+
         AppAdapter appAdapter = new AppAdapter(Activity2try.this, R.layout.list_item,
-                packages, packageManager);
+                userPackages, packageManager);
 
         appListView.setAdapter(appAdapter);
 
@@ -35,5 +40,20 @@ public class Activity2try extends Activity {
             Log.d(TAG, "Launch Activity : " +packageManager.
                     getLaunchIntentForPackage(packageInfo.packageName));
         }*/
+    }
+
+    private List<ApplicationInfo> filterUserPackages(List<ApplicationInfo> packages) {
+
+        List<ApplicationInfo> userApplications = new ArrayList<>(packages);
+
+        for (ApplicationInfo item : packages) {
+            if((item.flags & (ApplicationInfo.FLAG_UPDATED_SYSTEM_APP | ApplicationInfo.FLAG_SYSTEM)) > 0) {
+                userApplications.remove(item);
+            } else {
+                //User app. Do nothing.
+            }
+        }
+
+        return userApplications;
     }
 }
