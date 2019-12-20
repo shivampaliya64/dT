@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         bla = findViewById(R.id.button);
-        intent = new Intent(this , Activity2try.class);
+        intent = new Intent(this , hopeitworks.class);
 
 
         bla.setOnClickListener(new View.OnClickListener() {

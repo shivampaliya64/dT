@@ -21,9 +21,7 @@ public class Settings extends AppCompatActivity {
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_settings);
-        Device_count=(EditText)findViewById(R.id.editText2);
-        submitButton=(Button)findViewById(R.id.button3);
+
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
