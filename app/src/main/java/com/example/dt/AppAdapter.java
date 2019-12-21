@@ -7,6 +7,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -45,16 +46,20 @@ public class AppAdapter extends ArrayAdapter {
         }
 
         ApplicationInfo packageInfo = packages.get(position);
+
         viewHolder.appNameTV.setText(packageInfo.loadLabel(packageManager));
+        viewHolder.appIcon.setImageDrawable(packageInfo.loadIcon(packageManager));
 
         return convertView;
     }
 
     private class ViewHolder {
         final TextView appNameTV;
+        final ImageView appIcon;
 
         ViewHolder(View v) {
             this.appNameTV = v.findViewById(R.id.appNameTV);
+            this.appIcon = v.findViewById(R.id.appIcon);
         }
     }
 }
